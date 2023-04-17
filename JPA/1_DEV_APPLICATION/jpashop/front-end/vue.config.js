@@ -3,9 +3,9 @@ module.exports = defineConfig({
   transpileDependencies: true,
   //build output directory
   outputDir: "../back-end/src/main/resources/static",
+  // assetsDir: "./",
   //build index directory
-  indexPath: "../static/index.html",
-
+  // indexPath: "./index.html",
   //dev server // npm run serve options
   devServer: {
     //proxy
