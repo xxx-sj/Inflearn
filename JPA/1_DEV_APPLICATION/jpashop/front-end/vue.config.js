@@ -8,6 +8,7 @@ module.exports = defineConfig({
   // indexPath: "./index.html",
   //dev server // npm run serve options
   devServer: {
+    hot: true,
     //proxy
     proxy: {
       // http://locahost:8081 -> http://localhost:8080
@@ -15,6 +16,7 @@ module.exports = defineConfig({
         target: 'http://localhost:8080',
         //cross origin
         changeOrigin: true,
+        ws:false,
       }
     }
   }
