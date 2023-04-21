@@ -36,4 +36,13 @@ public class Category {
     //테이블 카테고리 설계로
     @OneToMany(mappedBy = "parent")
     private List<Category> child = new ArrayList<>();
+
+    //자식을 넣으면 부모도 들어가야 한다. 양방향 연관관계
+    //현재 메소드는 parent 기준으로 작성되었다.
+    public void addChildCategory(Category child) {
+        this.child.add(child);
+        child.setParent(this);
+    }
+
+
 }
