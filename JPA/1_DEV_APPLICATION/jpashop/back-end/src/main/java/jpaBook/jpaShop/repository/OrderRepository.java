@@ -3,8 +3,10 @@ package jpaBook.jpaShop.repository;
 import jpaBook.jpaShop.domain.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,13 +52,23 @@ public class OrderRepository {
 
         List<Predicate> criteria = new ArrayList<>();
 
+        //주문 상태 검색
         if (orderSearch.getOrderStatus() != null) {
             Predicate status = criteriaBuilder.equal(o.get("status"), orderSearch.getOrderStatus());
             criteria.add(status);
         }
-        //....
 
-        return null;
+        //회원 이름 검색
+        if (StringUtils.hasText(orderSearch.getMemberName())) {
+            Predicate name =
+                    criteriaBuilder.like(m.<String>get("name"), "%" + orderSearch.getMemberName() + "%");
+            criteria.add(name);
+        }
+
+        query.where(criteriaBuilder.and(criteria.toArray(new Predicate[criteria.size()])));
+        TypedQuery<Order> result = em.createQuery(query).setMaxResults(1000);
+
+        return result.getResultList();
     }
 
 //    public List<Order> findAll(OrderSearch orderSearch) {

@@ -10,7 +10,13 @@ export default {
   name: 'App',
   components: {
     HelloWorld
+  },
+  computed: {
+    testMethod() {
+      return this.$store.getters['']
+    },
   }
+
 }
 </script>
 
