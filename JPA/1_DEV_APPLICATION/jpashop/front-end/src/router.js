@@ -10,6 +10,7 @@ const router = createRouter({
         {path: "/", component: WelcomeHome},
         {path: "/team", component: TeamList},
         {path: "/coach", component: CoachList},
+        {path: "/:notFound(.*)", redirect: "/"}
 
         // {path: "/", redirect: "/"},
     //     {path: "/one", component: null},
