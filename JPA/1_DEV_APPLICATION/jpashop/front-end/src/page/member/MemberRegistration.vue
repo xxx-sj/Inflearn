@@ -1,6 +1,10 @@
 <template>
   <div>
-    <p>회원 가입</p>
+    <label>이름</label>
+    <input type="text" />
+    <label>도시</label>
+    <label>거리</label>
+    <label>우편번호</label>
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    상품 등록
+    상품등록
   </div>
 </template>
 

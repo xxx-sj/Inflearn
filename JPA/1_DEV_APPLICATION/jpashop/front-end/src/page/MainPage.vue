@@ -6,7 +6,7 @@
     <section>
       <p>회원기능</p>
       <section>
-        <router-link to="/members/register">회원 가입</router-link>
+        <router-link to="/members/register">회원등록</router-link>
         <router-link to="/members">회원 목록</router-link>
       </section>
     </section>
@@ -22,7 +22,7 @@
     <section>
     <p>주문 기능</p>
       <section>
-        <router-link to="/order">상품 주문</router-link>
+        <router-link to="/order-item">상품 주문</router-link>
         <router-link to="/orders">주문 내역</router-link>
       </section>
     </section>

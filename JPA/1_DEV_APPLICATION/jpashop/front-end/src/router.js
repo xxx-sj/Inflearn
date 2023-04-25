@@ -9,15 +9,14 @@ import OrderItem from "./page/order/OrderItem.vue";
 import OrderList from "./page/order/OrderList.vue";
 
 const router = createRouter({
+    history: createWebHistory(),
     routes: [
         {path: "/", component: MainPage},
-        {path: "/members", component: MemberList, children: [
-                {path: "register", component: MemberRegistration}
-            ]},
-        {path: "/items", component: ItemList, children: [
-                {path: "register", component: ItemRegistration}
-            ]},
-        {path: "/order", component: OrderItem},
+        {path: "/members", component: MemberList },
+        {path: "/members/register", component: MemberRegistration},
+        {path: "/items", component: ItemList},
+        {path: "/items/register", component: ItemRegistration},
+        {path: "/order-item", component: OrderItem},
         {path: "/orders", component: OrderList},
         {path: "/:notFound(.*)", redirect: "/"}
 
@@ -29,7 +28,6 @@ const router = createRouter({
         //     ]},
         //     {path: "/:notFound(.*)", component: null}
     ],
-    history: createWebHistory(),
 });
 
 export default router;

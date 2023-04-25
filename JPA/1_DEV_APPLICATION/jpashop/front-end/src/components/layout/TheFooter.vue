@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>@JPA SHOP V2></p>
+    <p>@JPA SHOP V2</p>
   </div>
 </template>
 
