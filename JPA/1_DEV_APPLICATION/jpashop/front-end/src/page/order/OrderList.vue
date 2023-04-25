@@ -1,10 +1,12 @@
 <template>
-  <p>Team List comp</p>
+  <div>
+    주문목록
+  </div>
 </template>
 
 <script>
 export default {
-  name: "TeamList"
+  name: "OrderList"
 }
 </script>
 

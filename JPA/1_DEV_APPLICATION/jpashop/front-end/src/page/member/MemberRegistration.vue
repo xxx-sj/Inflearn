@@ -1,10 +1,12 @@
 <template>
-  <p>Coach List</p>
+  <div>
+    <p>회원 가입</p>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "CoachList"
+  name: "MemberRegistration"
 }
 </script>
 
