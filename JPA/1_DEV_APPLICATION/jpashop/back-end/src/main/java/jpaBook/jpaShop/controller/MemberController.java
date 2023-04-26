@@ -4,21 +4,18 @@ import jpaBook.jpaShop.domain.Address;
 import jpaBook.jpaShop.domain.Member;
 import jpaBook.jpaShop.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@RestController
-@RequestMapping("rest/api/v1/members")
+@RequestMapping("rest/api/v1/member")
 @RequiredArgsConstructor
 public class MemberController {
 
     private final MemberService memberService;
 
     @PostMapping("/register")
-    public void create(@Valid MemberForm form) {
+    public void create(@Valid @RequestBody MemberForm form) {
 
         Address address = new Address(form.getCity(), form.getStreet(), form.getZipcode());
 
@@ -27,5 +24,12 @@ public class MemberController {
         member.setAddress(address);
 
         memberService.join(member);
+    }
+
+    @GetMapping("/member")
+    @ResponseBody
+    public Member find() {
+
+        return new Member();
     }
 }

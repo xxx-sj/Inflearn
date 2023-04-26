@@ -9,10 +9,8 @@
 </template>
 
 <script>
-
 export default {
   name: 'App',
-
   computed: {
     testMethod() {
       return this.$store.getters['']
