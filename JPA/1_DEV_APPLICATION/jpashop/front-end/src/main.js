@@ -6,17 +6,15 @@ import store from "./store"
 
 import TheHeader from "./components/layout/TheHeader.vue";
 import TheFooter from "./components/layout/TheFooter.vue";
-
 import axios from "axios";
 
 const app = createApp(App);
 
-app.component("the-header", TheHeader);
-app.component("the-footer", TheFooter);
-
-app.use(router);
-app.use(store);
+app.component("the-header", TheHeader)
+app.component("the-footer", TheFooter)
 
 app.provide("axios", axios);
 
+app.use(router);
+app.use(store)
 app.mount('#app');

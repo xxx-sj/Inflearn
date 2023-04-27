@@ -10,18 +10,17 @@ module.exports = defineConfig({
   devServer: {
     hot: true,
     //proxy
-
     proxy: {
       // http://locahost:8081 -> http://localhost:8080
       '/rest/api/': {
         target: 'http://localhost:8080',
         //cross origin
         changeOrigin: true,
+        ws:false,
       },
-      '/ws/': {
-        target: 'ws://localhost:8080',
-        changeOrigin : false,
-        ws: true
+      "/ws/": {
+        target: "ws://localhost:8080",
+        changeOrigin: false,
       }
     }
   }

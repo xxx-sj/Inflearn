@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class JpaShopErrorController implements ErrorController {
 
-    @GetMapping("/error")
-    public String redirectRoot() {
-        return "index.html";
-    }
+//    @GetMapping("/error")
+//    public String redirectRoot() {
+//        return "index.html";
+//    }
 }
