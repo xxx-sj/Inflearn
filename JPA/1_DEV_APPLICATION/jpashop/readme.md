@@ -4,5 +4,5 @@
 
 ### [오류 작성 블로그](https://cronex.tistory.com/)
 
-##### (vue-router 404 문제 해결법)[https://cronex.tistory.com/26]
-##### (spring-boot + vue 405 method not supported error 해결 법)[https://cronex.tistory.com/28]
+##### [vue-router 404 문제 해결법](https://cronex.tistory.com/26)
+##### [spring-boot + vue 405 method not supported error 해결 법](https://cronex.tistory.com/28)
