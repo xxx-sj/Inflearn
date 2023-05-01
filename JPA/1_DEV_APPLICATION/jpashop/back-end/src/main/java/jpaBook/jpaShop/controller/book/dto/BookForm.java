@@ -1,4 +1,4 @@
-package jpaBook.jpaShop.controller.book;
+package jpaBook.jpaShop.controller.book.dto;
 
 import jpaBook.jpaShop.domain.item.Book;
 import lombok.Getter;
