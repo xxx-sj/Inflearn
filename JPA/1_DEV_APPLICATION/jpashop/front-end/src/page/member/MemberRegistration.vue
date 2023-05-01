@@ -1,12 +1,25 @@
 <template>
-  <div>
+  <div style="display: flex; justify-content: center">
     <form @submit.prevent="save">
-      <label>이름</label>
-      <input type="text" />
-      <label>도시</label>
-      <label>거리</label>
-      <label>우편번호</label>
-      <button type="submit">제출</button>
+      <section>
+        <p>이름</p>
+        <input type="text" v-model="name"/>
+      </section>
+      <section>
+        <p>도시</p>
+        <input type="text" v-model="city"/>
+      </section>
+      <section>
+        <p>거리</p>
+        <input type="text" v-model="street"/>
+      </section>
+      <section>
+        <p>우편번호</p>
+        <input type="text" v-model="zipcode"/>
+      </section>
+      <section>
+        <button type="submit">제출</button>
+      </section>
     </form>
   </div>
 </template>
@@ -16,14 +29,33 @@ export default {
   name: "MemberRegistration",
   inject: ['axios'],
 
+  data() {
+    return {
+      registerURL: '/rest/api/v1/member',
+      name: "",
+      city: "",
+      street: "",
+      zipcode: "",
+    };
+  },
+
   methods: {
     save() {
-      this.axios.post('/rest/api/v1/member/register', {name: "aa"});
+      const member = {
+        name: this.name,
+        city: this.city,
+        street: this.street,
+        zipcode: this.zipcode,
+      };
+
+      this.axios.post(`${this.registerURL}/register`, member);
     }
   }
 }
 </script>
 
 <style scoped>
-
+  section input {
+    margin-left: 10px;
+  }
 </style>

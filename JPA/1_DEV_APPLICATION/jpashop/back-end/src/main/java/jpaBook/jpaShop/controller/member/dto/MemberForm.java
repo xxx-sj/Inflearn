@@ -1,4 +1,4 @@
-package jpaBook.jpaShop.controller;
+package jpaBook.jpaShop.controller.member.dto;
 
 import lombok.Getter;
 import lombok.Setter;
