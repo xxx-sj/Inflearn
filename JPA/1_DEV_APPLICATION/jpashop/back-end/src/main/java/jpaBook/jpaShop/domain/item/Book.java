@@ -30,5 +30,4 @@ public class Book extends Item {
         this.author = author;
         this.isbn = isbn;
     }
-
 }

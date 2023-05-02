@@ -60,5 +60,4 @@ public abstract class Item {
         this.price = price;
         this.stockQuantity = stockQuantity;
     }
-
 }

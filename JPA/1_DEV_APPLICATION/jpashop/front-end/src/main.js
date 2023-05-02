@@ -3,10 +3,10 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from "./router"
 import store from "./store"
+import axios from "axios";
 
 import TheHeader from "./components/layout/TheHeader.vue";
 import TheFooter from "./components/layout/TheFooter.vue";
-import axios from "axios";
 
 const app = createApp(App);
 
