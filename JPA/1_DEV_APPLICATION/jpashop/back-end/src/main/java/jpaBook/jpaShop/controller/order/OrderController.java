@@ -1,12 +1,16 @@
 package jpaBook.jpaShop.controller.order;
 
+import jpaBook.jpaShop.domain.Order;
 import jpaBook.jpaShop.repository.OrderSearch;
 import jpaBook.jpaShop.service.ItemService;
 import jpaBook.jpaShop.service.MemberService;
 import jpaBook.jpaShop.service.OrderService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,5 +29,10 @@ public class OrderController {
         orderService.order(memberId, itemId, count);
 
         return null;
+    }
+
+    @GetMapping("/orders")
+    public List<Order> orderList(@ModelAttribute OrderSearch orderSearch) {
+        return orderService.findOrders(orderSearch);
     }
 }
