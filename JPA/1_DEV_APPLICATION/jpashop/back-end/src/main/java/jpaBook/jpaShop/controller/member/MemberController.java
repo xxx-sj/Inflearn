@@ -1,6 +1,7 @@
 package jpaBook.jpaShop.controller.member;
 
 import jpaBook.jpaShop.controller.member.dto.MemberForm;
+import jpaBook.jpaShop.controller.member.dto.MemberListResponseDto;
 import jpaBook.jpaShop.domain.Address;
 import jpaBook.jpaShop.domain.Member;
 import jpaBook.jpaShop.service.MemberService;
@@ -35,7 +36,7 @@ public class MemberController {
     }
 
     @GetMapping("/members")
-    public List<Member> list() {
+    public List<MemberListResponseDto> list() {
         return memberService.findMembers();
     }
 }

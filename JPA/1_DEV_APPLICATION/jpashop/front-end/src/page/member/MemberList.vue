@@ -6,9 +6,9 @@
         <p>아이디: {{member.id}}</p>
         <p>이름: {{member.name}}</p>
         <section v-if="member.address">
-          <p>도시 : member.address.city</p>
-          <p>거리: member.address.street</p>
-          <p>우편번호: member.address.zipcode</p>
+          <p>도시 : {{member.address.city}}</p>
+          <p>거리: {{member.address.street}}</p>
+          <p>우편번호: {{member.address.zipcode}}</p>
         </section>
         </div>
     </section>
