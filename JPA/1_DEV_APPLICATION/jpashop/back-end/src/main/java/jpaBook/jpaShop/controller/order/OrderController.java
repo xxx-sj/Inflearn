@@ -1,5 +1,6 @@
 package jpaBook.jpaShop.controller.order;
 
+import jpaBook.jpaShop.controller.order.dto.OrderListResponseDto;
 import jpaBook.jpaShop.domain.Order;
 import jpaBook.jpaShop.repository.OrderSearch;
 import jpaBook.jpaShop.service.ItemService;
@@ -32,7 +33,7 @@ public class OrderController {
     }
 
     @GetMapping("/orders")
-    public List<Order> orderList(@ModelAttribute OrderSearch orderSearch) {
+    public List<OrderListResponseDto> orderList(@ModelAttribute OrderSearch orderSearch) {
         return orderService.findOrders(orderSearch);
     }
 }

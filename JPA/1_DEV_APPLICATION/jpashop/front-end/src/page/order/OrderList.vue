@@ -1,15 +1,74 @@
 <template>
   <div>
-    주문목록
+    <section>
+      <input type="text" placeholder="회원명" v-model="inputMemberName"/>
+      <select v-model="orderStatus">
+        <option value="">주문 상태</option>
+        <option value="ORDER">ORDER</option>
+        <option value="CANCEL">CANCEL</option>
+      </select>
+      <button type="button" @click="search">검색</button>
+    </section>
+    <section class="header">
+      <p>#</p>
+      <p>회원명</p>
+      <p>대표상품 이름</p>
+      <p>대표상품 주문 가격</p>
+      <p>대표상품 주문 수량</p>
+      <p>상태</p>
+      <p>일시</p>
+    </section>
+    <section v-for="order in orders" :key="order" class="item">
+      <p>{{order.id}}</p>
+      <p>{{order.memberName}}</p>
+      <p>{{order.itemName}}</p>
+      <p>{{order.price}}</p>
+      <p>{{order.count}}</p>
+      <p>{{order.orderStatus}}</p>
+      <p>{{order.orderDate}}</p>
+    </section>
   </div>
 </template>
 
 <script>
 export default {
-  name: "OrderList"
+  name: "OrderList",
+  inject: ['axios'],
+
+  data() {
+    return {
+      requestURL: "/rest/api/v1/order/orders",
+      inputMemberName: "",
+      orderStatus: "",
+      orders: [],
+    }
+  },
+
+  created() {
+    this.search();
+  },
+
+  methods: {
+    search() {
+      const entity = {
+        memberName: this.inputMemberName,
+        orderStatus: this.orderStatus
+      };
+      this.axios.get(this.requestURL, {
+        params: entity
+      }).then(response => {
+        console.log({response})
+        this.orders = response.data;
+      })
+    }
+  },
 }
 </script>
 
 <style scoped>
-
+ .header, .item {
+   display: flex;
+   flex-wrap: nowrap;
+   justify-content: space-between;
+ }
 </style>
