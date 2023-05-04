@@ -65,7 +65,7 @@ public class OrderService {
      * 주문취소
      */
     @Transactional
-    public void cancelOrder(Long orderId) {
+    public Long cancelOrder(Long orderId) {
         //주문 엔티티 조회
         Order order = orderRepository.findOne(orderId);
         //띠로 update 쿼리를 사용하지 않아도, 현재
@@ -74,6 +74,8 @@ public class OrderService {
          * order의 status와 item quantity를 수정한다.
          */
         order.cancel();
+
+        return order.getId();
     }
 
     //검색

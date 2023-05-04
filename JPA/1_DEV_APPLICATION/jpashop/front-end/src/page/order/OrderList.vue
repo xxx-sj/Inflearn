@@ -26,6 +26,7 @@
       <p>{{order.count}}</p>
       <p>{{order.orderStatus}}</p>
       <p>{{order.orderDate}}</p>
+      <button v-if="order.orderStatus != 'CANCEL'" type="button" @click="cancel(order.id)">CANCEL</button>
     </section>
   </div>
 </template>
@@ -57,10 +58,14 @@ export default {
       this.axios.get(this.requestURL, {
         params: entity
       }).then(response => {
-        console.log({response})
         this.orders = response.data;
       })
-    }
+    },
+    cancel(orderId) {
+      this.axios.post(`/rest/api/v1/order/${orderId}/cancel`).then(() => {
+        this.search();
+      })
+    },
   },
 }
 </script>

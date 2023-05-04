@@ -36,4 +36,9 @@ public class OrderController {
     public List<OrderListResponseDto> orderList(@ModelAttribute OrderSearch orderSearch) {
         return orderService.findOrders(orderSearch);
     }
+
+    @PostMapping("/{orderId}/cancel")
+    public Long cancelOrder(@PathVariable(value = "orderId")Long orderId) {
+        return orderService.cancelOrder(orderId);
+    }
 }
