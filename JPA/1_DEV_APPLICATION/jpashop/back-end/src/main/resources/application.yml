@@ -16,6 +16,7 @@ spring:
   jpa:
     # hibernate setting
     hibernate:
+#      ddl-auto: none
       ddl-auto: create
     properties:
       hibernate:
