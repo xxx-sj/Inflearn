@@ -33,47 +33,10 @@
 
 <script>
 export default {
-  name: "OrderList",
-  inject: ['axios'],
-
-  data() {
-    return {
-      requestURL: "/rest/api/v1/order/orders",
-      inputMemberName: "",
-      orderStatus: "",
-      orders: [],
-    }
-  },
-
-  created() {
-    this.search();
-  },
-
-  methods: {
-    search() {
-      const entity = {
-        memberName: this.inputMemberName,
-        orderStatus: this.orderStatus
-      };
-      this.axios.get(this.requestURL, {
-        params: entity
-      }).then(response => {
-        this.orders = response.data;
-      })
-    },
-    cancel(orderId) {
-      this.axios.post(`/rest/api/v1/order/${orderId}/cancel`).then(() => {
-        this.search();
-      })
-    },
-  },
+  name: "OrderList"
 }
 </script>
 
 <style scoped>
- .header, .item {
-   display: flex;
-   flex-wrap: nowrap;
-   justify-content: space-between;
- }
+
 </style>
