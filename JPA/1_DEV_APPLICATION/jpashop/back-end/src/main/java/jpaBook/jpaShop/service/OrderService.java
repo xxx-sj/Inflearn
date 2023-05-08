@@ -6,10 +6,7 @@ import jpaBook.jpaShop.domain.Member;
 import jpaBook.jpaShop.domain.Order;
 import jpaBook.jpaShop.domain.OrderItem;
 import jpaBook.jpaShop.domain.item.Item;
-import jpaBook.jpaShop.repository.ItemRepository;
-import jpaBook.jpaShop.repository.MemberRepository;
-import jpaBook.jpaShop.repository.OrderRepository;
-import jpaBook.jpaShop.repository.OrderSearch;
+import jpaBook.jpaShop.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +29,7 @@ public class OrderService {
     @Transactional
     public Long order(Long memberId, Long itemId, int count) {
 
-        Member member = memberRepository.findOne(memberId);
+        Member member = memberRepository.findById(memberId).get();
         Item item = itemRepository.findOne(itemId);
 
         //배송정보 생성

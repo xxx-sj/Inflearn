@@ -1,12 +1,11 @@
 package jpaBook.jpaShop.service;
 
 import jpaBook.jpaShop.domain.Member;
-import jpaBook.jpaShop.repository.MemberRepository;
+import jpaBook.jpaShop.repository.MemberRepositoryOld;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Fail.fail;
@@ -19,7 +18,7 @@ class MemberServiceTest {
     @Autowired
     MemberService memberService;
     @Autowired
-    MemberRepository memberRepository;
+    MemberRepositoryOld memberRepository;
 
     @Test
     public void  회원가입() throws Exception {
