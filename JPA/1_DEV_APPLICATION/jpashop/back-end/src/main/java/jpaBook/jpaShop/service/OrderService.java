@@ -77,7 +77,11 @@ public class OrderService {
 
     //검색
     public List<OrderListResponseDto> findOrders(OrderSearch orderSearch) {
-        return orderRepository.findAllByString(orderSearch).stream()
+//        return orderRepository.findAllByString(orderSearch).stream()
+//                .map(order -> new OrderListResponseDto(order))
+//                .collect(Collectors.toList());
+
+        return orderRepository.findAll(orderSearch).stream()
                 .map(order -> new OrderListResponseDto(order))
                 .collect(Collectors.toList());
     }
