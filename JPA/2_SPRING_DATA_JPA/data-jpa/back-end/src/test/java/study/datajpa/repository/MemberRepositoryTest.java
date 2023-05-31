@@ -313,11 +313,12 @@ class MemberRepositoryTest {
         em.clear();
 
         //when
-        List<UsernameOnly> result = memberRepository.findProjectionsByUsername("m1");
+//        List<UsernameOnly> result = memberRepository.findProjectionsByUsername("m1");
+        List<NestedClosedProjections> result = memberRepository.findProjectionsByUsername("m1", NestedClosedProjections.class);
 
-        for (UsernameOnly usernameOnly : result) {
+        for (NestedClosedProjections usernameOnly : result) {
             System.out.println("usernameOnly = " + usernameOnly.getUsername());
-            System.out.println("usernameOnly = " + usernameOnly.getAge());
+//            System.out.println("usernameOnly = " + usernameOnly.getAge());
         }
     }
 }
