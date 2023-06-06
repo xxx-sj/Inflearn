@@ -174,7 +174,7 @@ public class QuerydslBasicTest {
 
         Assertions.assertThat(result.size()).isEqualTo(2);
     }
-    
+
     //전체조회
     @Test
     public void paging2() {
@@ -244,7 +244,6 @@ public class QuerydslBasicTest {
 
     /**
      * 팀 A에 소속된 모든 회원
-     *
      */
     @Test
     public void join() {
@@ -434,7 +433,7 @@ public class QuerydslBasicTest {
             System.out.println("tuple = " + tuple);
         }
     }
-    
+
     @Test
     public void basicCase() {
         List<String> result = queryFactory
@@ -471,7 +470,7 @@ public class QuerydslBasicTest {
     @Test
     public void constant() {
         List<Tuple> result = queryFactory
-                .select(member.username,  Expressions.constant("A"))
+                .select(member.username, Expressions.constant("A"))
                 .from(member)
                 .fetch();
 
@@ -591,8 +590,8 @@ public class QuerydslBasicTest {
                         member.username.as("name"),
 
                         ExpressionUtils.as(JPAExpressions
-                        .select(memberSub.age.max())
-                        .from(memberSub), "age")
+                                .select(memberSub.age.max())
+                                .from(memberSub), "age")
                 ))
                 .from(member)
                 .fetch();
@@ -677,7 +676,7 @@ public class QuerydslBasicTest {
     private BooleanExpression bindEq(String usernameParam, Integer ageCond) {
         return usernameEq(usernameParam).and(ageEq(ageCond));
     }
-    
+
     @Test
     public void bulkUpdate() {
         long count = queryFactory
@@ -749,6 +748,36 @@ public class QuerydslBasicTest {
                 .fetch();
         for (Member fetch1 : fetch) {
             System.out.println("fetch1 = " + fetch1);
+        }
+    }
+
+    @Test
+    public void sqlFunction() {
+        List<String> result = queryFactory
+                .select(
+                        Expressions.stringTemplate(
+                                "function('replace', {0}, {1}, {2})",
+                                member.username, "member", "M")
+
+                )
+                .from(member)
+                .fetch();
+
+        for (String s : result) {
+            System.out.println("s = " + s);
+        }
+    }
+
+    @Test
+    public void sqlFunction2() {
+        List<String> result = queryFactory
+                .select(member.username)
+                .from(member)
+                .where(member.username.eq(Expressions.stringTemplate("function('lower', {0})", member.username)))
+                .fetch();
+
+        for (String s : result) {
+            System.out.println("s = " + s);
         }
     }
 }
