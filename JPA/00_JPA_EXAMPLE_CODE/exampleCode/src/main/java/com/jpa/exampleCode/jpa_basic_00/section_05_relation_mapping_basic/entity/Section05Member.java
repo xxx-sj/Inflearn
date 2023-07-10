@@ -28,5 +28,4 @@ public class Section05Member {
         this.team = team;
         team.getMemberList().add(this);
     }
-
 }

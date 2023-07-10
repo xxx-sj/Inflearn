@@ -27,4 +27,18 @@ public class Section05Basic {
 
         em.persist(member);
     }
+
+    /**
+     * 연관관계의 주인이 아닌 Team에 member를 추가해도 저장되지 않는다.
+     * member 테이블의 FK값이 null이 들어감
+     *
+     */
+    public void Section05Caution() {
+        Section05Member member = new Section05Member("section05Member");
+        em.persist(member);
+
+        Section05Team team = new Section05Team("section05Team");
+        team.getMemberList().add(member);
+        em.persist(team);
+    }
 }

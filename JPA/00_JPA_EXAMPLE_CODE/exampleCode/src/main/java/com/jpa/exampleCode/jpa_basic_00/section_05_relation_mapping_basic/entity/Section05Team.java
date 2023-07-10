@@ -1,6 +1,7 @@
 package com.jpa.exampleCode.jpa_basic_00.section_05_relation_mapping_basic.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Section05Team {
 
     @Id
@@ -22,6 +24,5 @@ public class Section05Team {
     public Section05Team(String name) {
         this.name = name;
     }
-
 
 }
