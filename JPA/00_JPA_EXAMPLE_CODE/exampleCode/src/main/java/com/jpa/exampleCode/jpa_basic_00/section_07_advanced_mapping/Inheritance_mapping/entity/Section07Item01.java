@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "DTYPE")
-public class Section07Item01 {
+public abstract class Section07Item01 {
 
     @Id
     @GeneratedValue
