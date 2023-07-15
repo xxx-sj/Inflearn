@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-//@Transactional
+@Transactional
 class Section06ManyToOneTest {
 
     @Autowired
@@ -17,5 +17,10 @@ class Section06ManyToOneTest {
     @Test
     void ManyToOne() {
         section06ManyToOne.ManyToOne();
+    }
+
+    @Test
+    void testMethod() {
+        section06ManyToOne.test();
     }
 }

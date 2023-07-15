@@ -39,4 +39,22 @@ public class Section06ManyToOne {
         System.out.println("=======================");
 
     }
+
+    public void test() {
+        Section06Team01 team01 = new Section06Team01();
+        team01.setName("team");
+        em.persist(team01);
+        Section06Member01 member01 = new Section06Member01();
+        member01.setUsername("member1");
+        member01.setTeam(team01);
+        em.persist(member01);
+
+        em.flush();
+        em.clear();
+
+        Section06Member01 member011 = em.find(Section06Member01.class, member01.getId());
+        System.out.println("member011 = " + member011.getTeam().getClass());
+        System.out.println("member011.getTeam().getName() = " + member011.getTeam().getName());
+
+    }
 }
