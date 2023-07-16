@@ -18,4 +18,9 @@ public class Section10Member {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_ID")
     private Section10Team team;
+
+    public void changeTeam(Section10Team team) {
+        this.team = team;
+        team.getMemberList().add(this);
+    }
 }

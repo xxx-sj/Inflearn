@@ -4,9 +4,9 @@ server:
 spring:
   datasource:
     # mac
-    url: jdbc:h2:tcp://localhost/~//Desktop/github/h2/DB/jpa-example-code
+#    url: jdbc:h2:tcp://localhost/~//Desktop/github/h2/DB/jpa-example-code
     # window
-#    url: jdbc:h2:tcp://localhost/D:\H2\db\jpa-example-code
+    url: jdbc:h2:tcp://localhost/D:\H2\db\jpa-example-code
     driver-class-name: org.h2.Driver
     username: sa
     password:
