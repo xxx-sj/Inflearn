@@ -19,6 +19,8 @@ public class Section10Member {
     @JoinColumn(name = "TEAM_ID")
     private Section10Team team;
 
+    @Enumerated(EnumType.STRING)
+    private Section10MemberType type;
     public void changeTeam(Section10Team team) {
         this.team = team;
         team.getMemberList().add(this);
