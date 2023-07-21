@@ -107,6 +107,7 @@ public class Section11FetchJoinBasic {
         for (Object[] objects : list) {
             System.out.println("objects = " + objects[0]);
             System.out.println("objects = " + objects[1]);
+//            System.out.println("objects = " + objects[2]);
         }
     }
 
