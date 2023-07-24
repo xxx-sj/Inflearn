@@ -4,12 +4,14 @@ import com.jpa.exampleCode.jpa_basic_00.section_10_oop_query_language_basic.enti
 import com.jpa.exampleCode.jpa_basic_00.section_10_oop_query_language_basic.entity.Section10Team;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@ToString(of = {"id", "username", "age"})
 @NamedQuery(
         name = "Member.findByUsername",
         query = "select m from Section11Member m where m.username = :username"
