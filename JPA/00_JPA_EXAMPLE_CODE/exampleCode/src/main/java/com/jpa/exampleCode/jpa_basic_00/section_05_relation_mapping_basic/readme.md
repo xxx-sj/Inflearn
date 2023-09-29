@@ -8,4 +8,9 @@
 - 연관관계의 주인이 아닌쪽에서는 읽기만 가능하다.
   - [ Team에서는 읽기만 가능하다.]
   - getMemberList().add(new Member()); 를 하여도 DB에 반영되지 않는다.
-- 
+
+
+- joinColumn 에 사용하는 name 속성은 join하는 entity의 column 이름이 아닌
+- join하는 테이블에서 해당 컬럼을 어떠한 이름으로 나타낼 것인지에 대한 표현이다. 
+- 하나의 컬럼인 것이다. 조인할때는 기본적으로 따로 설정하지 않는다면 해당 테이블의 
+- @Id로 조인하게 된다. [referencedColumnName 속성]
