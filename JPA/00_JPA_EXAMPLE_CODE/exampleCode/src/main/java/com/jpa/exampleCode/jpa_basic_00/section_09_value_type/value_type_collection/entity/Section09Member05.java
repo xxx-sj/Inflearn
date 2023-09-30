@@ -23,9 +23,13 @@ public class Section09Member05 {
     @Column(name = "FOOD_NAME")
     private Set<String> favoriteFoods = new HashSet<>();
 
-    @ElementCollection
-    @CollectionTable(name = "ADDRESS", joinColumns =
+//    @ElementCollection
+//    @CollectionTable(name = "ADDRESS", joinColumns =
+//    @JoinColumn(name = "MEMBER_ID")
+//    )
+//    private List<Section09Address02> addressHistory = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "MEMBER_ID")
-    )
-    private List<Section09Address02> addressHistory = new ArrayList<>();
+    private List<Section09AddressHistory> addressHistories = new ArrayList<>();
 }

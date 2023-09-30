@@ -25,7 +25,7 @@ public class Section09Member02 {
             @AttributeOverride(name = "city", column = @Column(name = "WORK_CITY")),
             @AttributeOverride(name = "street", column = @Column(name = "WORK_STREET")),
             @AttributeOverride(name = "zipcode", column = @Column(name = "WORK_ZIPCODE")),
-            @AttributeOverride(name = "testEntity", column = @Column(name = "WORK_TEST_ENTITY"))
+//            @AttributeOverride(name = "testEntity", column = @Column(name = "WORK_TEST_ENTITY"))
     })
     @Embedded
     private Section09Address02 workAddress;
