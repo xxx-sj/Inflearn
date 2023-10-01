@@ -18,6 +18,11 @@ class Section11FetchJoinBasicTest {
     void queryBasic() {
         service.queryBasic();
     }
+
+    @Test
+    void queryTest() {
+        service.queryTest();
+    }
     @Test
     void fetchJoinBasic() {
         service.fetchJoinBasic();

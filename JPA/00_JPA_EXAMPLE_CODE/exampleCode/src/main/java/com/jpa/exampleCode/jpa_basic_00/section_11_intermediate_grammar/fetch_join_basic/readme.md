@@ -35,6 +35,11 @@
 - 페치 조인은 객체 그래프를 SQL 한번에 조회하는 개념
 
 
+- fetch join과 join의 차이 중 해본것으로는 fetch join은 select절에 m[member]만 조회하고 fetch로 team을 묶는다면  
+- sql에서 기본 inner join으로 team와 member를 모두 조회하지만 
+- join같은 경우는 join으로 team을 묶어도 select절에서 m만 조회한다면 join query를 나가지만 조회는 m[member]만 조회하고
+- 객체 탐색을 통해 team을 touch할 때 team을 조회하는 query가 따로 나가게 된다. 
+
 ### 벌크 연산 주의
 - 벌크 연산은 영속성 컨텍스트를 무시하고 데이터베이스에 직접 쿼리
   - 벌크 연산을 먼저 실행 또는,

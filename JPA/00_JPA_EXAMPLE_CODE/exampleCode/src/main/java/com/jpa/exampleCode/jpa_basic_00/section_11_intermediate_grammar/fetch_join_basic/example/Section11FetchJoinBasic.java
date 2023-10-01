@@ -35,6 +35,17 @@ public class Section11FetchJoinBasic {
         }
     }
 
+    public void queryTest() {
+        this.insert();
+
+        List<Section11Member> resultList = em.createQuery("select m, t from Section11Member m join m.team t", Section11Member.class).getResultList();
+        for (Section11Member section11Member : resultList) {
+            System.out.println("section11Member.getTeam().getClass() = " + section11Member.getTeam().getClass());
+            System.out.println("section11Member.getUsername() = " + section11Member.getUsername());
+            System.out.println("section11Member.getTeam().getName() = " + section11Member.getTeam().getName());
+        }
+    }
+
     /**
      * fetch join 을 통해 select을 할 때 join하여 모든 데이터를 가져온다. 기본 inner join
      *
