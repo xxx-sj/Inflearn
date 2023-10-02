@@ -27,4 +27,9 @@ class Section11UseEntityDirectlyTest {
     void useEntityInQueryParameter() {
         service.useEntityInQueryParameter();
     }
+
+    @Test
+    void useEntityInWhere() {
+        service.useEntityInWhere();
+    }
 }

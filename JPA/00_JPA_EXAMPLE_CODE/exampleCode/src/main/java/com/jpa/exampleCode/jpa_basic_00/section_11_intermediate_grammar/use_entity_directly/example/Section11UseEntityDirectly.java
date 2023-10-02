@@ -68,6 +68,18 @@ public class Section11UseEntityDirectly {
         System.out.println("member = " + member);
     }
 
+    public void useEntityInWhere() {
+        this.insert();
+
+        List<Section11Member> resultList1 = em.createQuery("select m from Section11Member m where m.team.name = :teamName", Section11Member.class)
+                .setParameter("teamName", "teamA")
+                .getResultList();
+
+        for (Section11Member section11Member : resultList1) {
+            System.out.println("section11Member = " + section11Member);
+        }
+    }
+
     private void insert() {
         Section11Team teamA = new Section11Team();
         teamA.setName("teamA");

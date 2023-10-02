@@ -45,6 +45,7 @@ public class Section11FetchJoinBasic {
 //        System.out.println("section11Team.getId() = " + section11Team.getId());
 //        System.out.println("section11Team.getName() = " + section11Team.getName());
 
+//        List<Section11Member> resultList = em.createQuery("select m from Section11Member m", Section11Member.class).getResultList();
         List<Section11Member> resultList = em.createQuery("select m from Section11Member m join m.team t", Section11Member.class).getResultList();
 
         for (Section11Member section11Member : resultList) {
@@ -76,7 +77,7 @@ public class Section11FetchJoinBasic {
     public void fetchJoinBasic() {
         this.insert();
 
-        List<Section11Member> selectMFromSection11Member = em.createQuery("select m from Section11Member m join fetch m.team t", Section11Member.class).getResultList();
+        List<Section11Member> selectMFromSection11Member = em.createQuery("select m from Section11Member m join fetch m.team", Section11Member.class).getResultList();
         for (Section11Member section11Member : selectMFromSection11Member) {
             System.out.println("section11Member.getTeam().getClass() = " + section11Member.getTeam().getClass());
             System.out.println("section11Member.getUsername() + \", \" + section11Member.getTeam().getName() = " + section11Member.getUsername() + ", " + section11Member.getTeam().getName());
