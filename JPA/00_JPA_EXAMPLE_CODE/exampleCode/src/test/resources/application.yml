@@ -7,7 +7,7 @@ spring:
     # mac
 #    url: jdbc:h2:tcp://localhost/~//Desktop/github/h2/DB/jpa-example-code
     # window
-    url: jdbc:h2:tcp://localhost/D:\H2\db\jpa-example-code
+#    url: jdbc:h2:tcp://localhost/D:\H2\db\jpa-example-code
     # in-memory
 #    url: jdbc:h2:mem:test
     driver-class-name: org.h2.Driver

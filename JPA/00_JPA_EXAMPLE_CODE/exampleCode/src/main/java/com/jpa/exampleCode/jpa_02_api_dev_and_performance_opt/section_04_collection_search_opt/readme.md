@@ -10,3 +10,4 @@
 2. 컬렉션은 지연로딩으로 조회한다.
 3. 지연 로딩 성능 최적화를 위해 "hibernate.default_batch_fetch_size"[global], @BatchSize[local] 를 적용한다.
    - 이 옵션을 사용하면 컬렉션이나, 프록시 객체를 한꺼번에 설장한 size만큼 in 쿼리로 조회한다.
+   - batch_size는 100 ~ 1000개가 적당하다 [max = 1000]
