@@ -1,4 +1,4 @@
-package com.jpa.exampleCode.jpa_02_api_dev_and_performance_opt.section_04_collection_search_opt;
+package com.jpa.exampleCode.jpa_02_api_dev_and_performance_opt.section_04_collection_search_opt.entityToDTO_paging;
 
 import com.jpa.exampleCode.jpa_02_api_dev_and_performance_opt.entity.Jpa2Order;
 import com.jpa.exampleCode.jpa_02_api_dev_and_performance_opt.entity.Jpa2OrderItem;
