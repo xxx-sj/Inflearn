@@ -1,12 +1,11 @@
 package com.jpa.exampleCode.jpa_02_api_dev_and_performance_opt.section_04_collection_search_opt.plat_data_opt;
 
+import com.jpa.exampleCode.jpa_02_api_dev_and_performance_opt.section_04_collection_search_opt.collection_search_opt_07.Section04PlatDataOpt;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
