@@ -1,6 +1,5 @@
-package com.jpa.exampleCode.jpa_02_api_dev_and_performance_opt.section_04_collection_search_opt.search_with_dto.exam;
+package com.jpa.exampleCode.jpa_02_api_dev_and_performance_opt.section_04_collection_search_opt.search_with_dto_v4.exam;
 
-import com.jpa.exampleCode.jpa_02_api_dev_and_performance_opt.entity.Jpa2Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

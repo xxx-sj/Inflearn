@@ -1,6 +1,6 @@
 package com.jpa.exampleCode.jpa_02_api_dev_and_performance_opt.section_04_collection_search_opt;
 
-import com.jpa.exampleCode.jpa_02_api_dev_and_performance_opt.section_04_collection_search_opt.entityToDTO_paging_04.Section04Exam;
+import com.jpa.exampleCode.jpa_02_api_dev_and_performance_opt.section_04_collection_search_opt.entityToDTO_paging_04_v3.Section04Exam;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

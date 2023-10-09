@@ -1,7 +1,7 @@
-package com.jpa.exampleCode.jpa_02_api_dev_and_performance_opt.section_04_collection_search_opt.flat_data_opt;
+package com.jpa.exampleCode.jpa_02_api_dev_and_performance_opt.section_04_collection_search_opt.flat_data_opt_v6;
 
-import com.jpa.exampleCode.jpa_02_api_dev_and_performance_opt.section_04_collection_search_opt.search_with_dto.exam.OrderItemQueryDto;
-import com.jpa.exampleCode.jpa_02_api_dev_and_performance_opt.section_04_collection_search_opt.search_with_dto.exam.OrderQueryDto;
+import com.jpa.exampleCode.jpa_02_api_dev_and_performance_opt.section_04_collection_search_opt.search_with_dto_v4.exam.OrderItemQueryDto;
+import com.jpa.exampleCode.jpa_02_api_dev_and_performance_opt.section_04_collection_search_opt.search_with_dto_v4.exam.OrderQueryDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
