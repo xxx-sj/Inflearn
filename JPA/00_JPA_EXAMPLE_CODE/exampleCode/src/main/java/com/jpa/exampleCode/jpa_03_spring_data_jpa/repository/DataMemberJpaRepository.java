@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.swing.text.html.Option;
+import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class DataMemberJpaRepository {
@@ -16,6 +19,25 @@ public class DataMemberJpaRepository {
     public DataMember save(DataMember member) {
         em.persist(member);
         return member;
+    }
+
+    public void delete(DataMember member) {
+        em.remove(member);
+    }
+
+    public List<DataMember> findAll() {
+        return em.createQuery("select m from DataMember m", DataMember.class)
+                .getResultList();
+    }
+
+    public Optional<DataMember> findById(Long id) {
+        DataMember member = em.find(DataMember.class, id);
+        return Optional.ofNullable(member);
+    }
+
+    public long count() {
+        return em.createQuery("select count(m) from DataMember  m", Long.class)
+                .getSingleResult();
     }
 
     public DataMember find(Long id) {
