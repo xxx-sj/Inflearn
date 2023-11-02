@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 
 @SpringBootTest
@@ -108,6 +109,20 @@ class DataMemberRepositoryTest {
         List<DataMemberDto> memberDto = memberRepository.findMemberDto();
         for (DataMemberDto dataMemberDto : memberDto) {
             System.out.println("dataMemberDto = " + dataMemberDto);
+        }
+
+    }
+
+    @Test
+    public void findByNames() {
+        DataMember m1 = new DataMember("AAA", 10);
+        DataMember m2 = new DataMember("BBB", 20);
+        memberRepository.save(m1);
+        memberRepository.save(m2);
+
+        List<DataMember> byNames = memberRepository.findByNames(Arrays.asList("aaa", "BBb"));
+        for (DataMember byName : byNames) {
+            System.out.println("byName = " + byName);
         }
 
     }
