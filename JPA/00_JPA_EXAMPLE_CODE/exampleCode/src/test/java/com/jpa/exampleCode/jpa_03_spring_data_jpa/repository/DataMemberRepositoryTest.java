@@ -1,6 +1,8 @@
 package com.jpa.exampleCode.jpa_03_spring_data_jpa.repository;
 
+import com.jpa.exampleCode.jpa_03_spring_data_jpa.dto.DataMemberDto;
 import com.jpa.exampleCode.jpa_03_spring_data_jpa.entity.DataMember;
+import com.jpa.exampleCode.jpa_03_spring_data_jpa.entity.DataTeam;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,9 @@ class DataMemberRepositoryTest {
 
     @Autowired
     DataMemberRepository memberRepository;
+
+    @Autowired
+    DataTeamRepository teamRepository;
 
     @Test
     public void testMember() {
@@ -66,7 +71,7 @@ class DataMemberRepositoryTest {
     }
 
     @Test
-    public void test() {
+    public void testQuery() {
         DataMember m1 = new DataMember("AAA", 10);
         DataMember m2 = new DataMember("BBB", 20);
         memberRepository.save(m1);
@@ -75,5 +80,37 @@ class DataMemberRepositoryTest {
         List<DataMember> result = memberRepository.findUser("AAA", 10);
         Assertions.assertEquals(result.get(0), m1);
     }
+
+    @Test
+    public void findUsernameList() {
+        DataMember m1 = new DataMember("AAA", 10);
+        DataMember m2 = new DataMember("BBB", 20);
+        memberRepository.save(m1);
+        memberRepository.save(m2);
+
+        List<String> stringList = memberRepository.findUSernameList();
+        for (String s : stringList) {
+            System.out.println("s = " + s);
+        }
+
+    }
+
+    @Test
+    public void findMemberDto() {
+        DataTeam team = new DataTeam("teamA");
+        teamRepository.save(team);
+
+        DataMember m1 = new DataMember("AAA", 10);
+        m1.changeTeam(team);
+
+        memberRepository.save(m1);
+
+        List<DataMemberDto> memberDto = memberRepository.findMemberDto();
+        for (DataMemberDto dataMemberDto : memberDto) {
+            System.out.println("dataMemberDto = " + dataMemberDto);
+        }
+
+    }
+
 
 }
