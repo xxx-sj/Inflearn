@@ -65,4 +65,15 @@ class DataMemberRepositoryTest {
         Assertions.assertEquals(member11.get(0).getUsername(), member1.getUsername());
     }
 
+    @Test
+    public void test() {
+        DataMember m1 = new DataMember("AAA", 10);
+        DataMember m2 = new DataMember("BBB", 20);
+        memberRepository.save(m1);
+        memberRepository.save(m2);
+
+        List<DataMember> result = memberRepository.findUser("AAA", 10);
+        Assertions.assertEquals(result.get(0), m1);
+    }
+
 }

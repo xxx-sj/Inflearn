@@ -33,6 +33,11 @@ public class DataMember {
         }
     }
 
+    public DataMember(String username, int age) {
+        this.username = username;
+        this.age = age;
+    }
+
     public void changeUserName(String username) {
         this.username = username;
     }
