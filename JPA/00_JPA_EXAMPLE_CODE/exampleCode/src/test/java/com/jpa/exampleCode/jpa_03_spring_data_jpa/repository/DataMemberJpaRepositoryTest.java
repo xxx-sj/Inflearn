@@ -54,4 +54,31 @@ class DataMemberJpaRepositoryTest {
         long count2 = memberJpaRepository.count();
         Assertions.assertEquals(count2, 0);
     }
+
+
+    @Test
+    public void paging() {
+        memberJpaRepository.save(new DataMember("member1", 10));
+        memberJpaRepository.save(new DataMember("member2", 10));
+        memberJpaRepository.save(new DataMember("member3", 10));
+        memberJpaRepository.save(new DataMember("member4", 10));
+        memberJpaRepository.save(new DataMember("member5", 10));
+        memberJpaRepository.save(new DataMember("member6", 10));
+
+        int age = 10;
+        int offset = 0;
+        int limit = 3;
+        //when
+        List<DataMember> members = memberJpaRepository.findByPage(age, offset, limit);
+        long totalCount = memberJpaRepository.totalCount(age);
+
+        //페이지 계산 공식 적용
+        // totalPage = totalCount / size
+        //마지막 페이지
+        //최초 페이지
+
+        //then
+        Assertions.assertEquals(members.size(), 3);
+        Assertions.assertEquals(totalCount, 6);
+    }
 }

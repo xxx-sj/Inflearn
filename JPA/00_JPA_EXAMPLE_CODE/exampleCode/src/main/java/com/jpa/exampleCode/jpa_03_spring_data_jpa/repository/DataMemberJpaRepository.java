@@ -43,4 +43,20 @@ public class DataMemberJpaRepository {
     public DataMember find(Long id) {
         return em.find(DataMember.class, id);
     }
+
+    public List<DataMember> findByPage(int age, int offset, int limit) {
+        List<DataMember> result = em.createQuery("select m from DataMember m where m.age = :age order by m.username desc", DataMember.class)
+                .setParameter("age", age)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+
+        return result;
+    }
+
+    public long totalCount(int age) {
+        return em.createQuery("select count(m) from DataMember m where m.age = :age", Long.class)
+                .setParameter("age", age)
+                .getSingleResult();
+    }
 }
