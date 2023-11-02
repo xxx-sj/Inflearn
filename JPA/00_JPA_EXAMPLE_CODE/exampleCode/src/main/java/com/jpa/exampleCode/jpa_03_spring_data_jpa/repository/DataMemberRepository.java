@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 public interface DataMemberRepository extends JpaRepository<DataMember, Long> {
 
@@ -30,4 +31,14 @@ public interface DataMemberRepository extends JpaRepository<DataMember, Long> {
     //컬렉션 파라미터 바인딩
     @Query("select m from DataMember m where m.username in :names")
     List<DataMember> findByNames(@Param("names") Collection<String> names);
+
+    //메서드 이름 쿼리 :: 컬렉션
+    //빈 컬렉션을 반환한다.
+    List<DataMember> findListByUsername(String username);
+
+    //단건 조회 시 다중으로 조회되면 오류발생
+    //메서드 이름 쿼리 :: 단건
+    DataMember findMemberByUsername(String username);
+    //메서드 이름 쿼리 :: optional
+    Optional<DataMember> findOptionalByUsername(String username);
 }

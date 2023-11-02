@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 @Transactional
@@ -124,6 +125,26 @@ class DataMemberRepositoryTest {
         for (DataMember byName : byNames) {
             System.out.println("byName = " + byName);
         }
+
+    }
+
+    @Test
+    public void returnType() {
+        DataMember m1 = new DataMember("AAA", 10);
+        DataMember m2 = new DataMember("BBB", 20);
+        memberRepository.save(m1);
+        memberRepository.save(m2);
+
+        List<DataMember> aaa = memberRepository.findListByUsername("AAA");
+        for (DataMember member : aaa) {
+            System.out.println("member = " + member);
+        }
+
+        DataMember aaa1 = memberRepository.findMemberByUsername("AAA");
+        System.out.println("aaa1 = " + aaa1);
+
+        Optional<DataMember> aaa2 = memberRepository.findOptionalByUsername("AAA");
+        System.out.println("aaa2.get() = " + aaa2.get());
 
     }
 
