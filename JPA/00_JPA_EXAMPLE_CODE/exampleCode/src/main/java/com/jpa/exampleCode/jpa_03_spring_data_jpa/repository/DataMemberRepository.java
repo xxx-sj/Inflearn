@@ -2,6 +2,9 @@ package com.jpa.exampleCode.jpa_03_spring_data_jpa.repository;
 
 import com.jpa.exampleCode.jpa_03_spring_data_jpa.dto.DataMemberDto;
 import com.jpa.exampleCode.jpa_03_spring_data_jpa.entity.DataMember;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -41,4 +44,13 @@ public interface DataMemberRepository extends JpaRepository<DataMember, Long> {
     DataMember findMemberByUsername(String username);
     //메서드 이름 쿼리 :: optional
     Optional<DataMember> findOptionalByUsername(String username);
+
+    //인자로 Pageable을 넘기면 페이징 쿼리가 된다.
+    //반환타입에 따라 total count를 날리지 말지를 결정한다.
+    //pageable구현체로는 pageRequest를 많이 사용한다.
+
+    @Query(value="select m from DataMember m left join m.team t", countQuery = "select count(m.username) from DataMember m")
+    Page<DataMember> findByAge(int age, Pageable pageable);
+
+    Slice<DataMember> findUserSliceByAge(int age, Pageable pageable);
 }

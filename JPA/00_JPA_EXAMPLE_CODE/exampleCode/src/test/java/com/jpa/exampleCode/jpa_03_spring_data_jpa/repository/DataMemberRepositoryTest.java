@@ -5,8 +5,13 @@ import com.jpa.exampleCode.jpa_03_spring_data_jpa.entity.DataMember;
 import com.jpa.exampleCode.jpa_03_spring_data_jpa.entity.DataTeam;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.internal.matchers.ArrayEquals;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
@@ -148,5 +153,75 @@ class DataMemberRepositoryTest {
 
     }
 
+    //dto로 변환해서 반환하기
+    @Test
+    public void paging() {
+        memberRepository.save(new DataMember("member1", 10));
+        memberRepository.save(new DataMember("member2", 10));
+        memberRepository.save(new DataMember("member3", 10));
+        memberRepository.save(new DataMember("member4", 10));
+        memberRepository.save(new DataMember("member5", 10));
+        memberRepository.save(new DataMember("member6", 10));
+
+        int age = 10;
+        PageRequest pageRequest = PageRequest.of(0, 3, Sort.by(Sort.Direction.DESC, "username"));
+        //when
+        Page<DataMember> page = memberRepository.findByAge(age, pageRequest);
+        
+        Page<DataMemberDto> toMap = page.map(member -> new DataMemberDto(member.getId(), member.getUsername(), null));
+        
+        List<DataMember> content = page.getContent();
+        long totalElements = page.getTotalElements();
+
+        for (DataMember member : content) {
+            System.out.println("member = " + member);
+        }
+        System.out.println("totalElements = " + totalElements);
+
+        System.out.println("page.getNumber() = " + page.getNumber());
+        Assertions.assertEquals(content.size(), 3);
+        Assertions.assertEquals(page.getTotalElements(), 6);
+        Assertions.assertEquals(page.getNumber(), 0);
+        Assertions.assertEquals(page.getTotalPages(), 2);
+        Assertions.assertTrue(page.isFirst());
+        Assertions.assertTrue(page.hasNext());
+        
+    }
+
+    //slice는 limit + 1을 통해 다음 페이지가 있는지 확인한다. size = 3 => 4를 요청
+    //반환타입을 slice로 해주어야 한다.
+    @Test
+    public void paging2() {
+        memberRepository.save(new DataMember("member1", 10));
+        memberRepository.save(new DataMember("member2", 10));
+        memberRepository.save(new DataMember("member3", 10));
+        memberRepository.save(new DataMember("member4", 10));
+        memberRepository.save(new DataMember("member5", 10));
+        memberRepository.save(new DataMember("member6", 10));
+
+        int age = 10;
+        PageRequest pageRequest = PageRequest.of(0, 3, Sort.by(Sort.Direction.DESC, "username"));
+        //when
+        Slice<DataMember> page = memberRepository.findUserSliceByAge(age, pageRequest);
+
+        List<DataMember> content = page.getContent();
+//        long totalElements = page.getTotalElements();
+
+        for (DataMember member : content) {
+            System.out.println("member = " + member);
+        }
+//        System.out.println("totalElements = " + totalElements);
+
+        System.out.println("page.getSize() = " + page.getSize());
+        System.out.println("page.getNumberOfElements() = " + page.getNumberOfElements());
+        System.out.println("page.getNumber() = " + page.getNumber());
+        Assertions.assertEquals(content.size(), 3);
+//        Assertions.assertEquals(page.getTotalElements(), 6);
+        Assertions.assertEquals(page.getNumber(), 0);
+//        Assertions.assertEquals(page.getTotalPages(), 2);
+        Assertions.assertTrue(page.isFirst());
+        Assertions.assertTrue(page.hasNext());
+
+    }
 
 }
