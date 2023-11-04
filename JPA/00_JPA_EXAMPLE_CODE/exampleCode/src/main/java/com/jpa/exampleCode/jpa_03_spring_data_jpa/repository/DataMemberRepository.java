@@ -5,6 +5,7 @@ import com.jpa.exampleCode.jpa_03_spring_data_jpa.entity.DataMember;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -59,4 +60,22 @@ public interface DataMemberRepository extends JpaRepository<DataMember, Long> {
     @Modifying(clearAutomatically = true)
     @Query("update DataMember m set m.age = m.age + 1 where m.age >= :age")
     int bulkAgePlus(@Param("age") int age);
+
+    @Query("select m from DataMember  m left join fetch m.team t")
+    List<DataMember> findMemberFetchJoin();
+
+    @Override
+//    @Query("select m from DataMember  m left join fetch m.team t")
+    @EntityGraph(attributePaths = {"team"})
+    List<DataMember> findAll();
+
+
+    @EntityGraph(attributePaths = {"team"})
+    @Query("select m from DataMember m")
+    List<DataMember> findMemberEntityGraph();
+
+
+    @EntityGraph(attributePaths = {"team"})
+    List<DataMember> findEntityGraphByUsername(@Param("username") String username);
+
 }

@@ -249,4 +249,37 @@ class DataMemberRepositoryTest {
         Assertions.assertEquals(resultCount, 3);
     }
 
+
+    @Test
+    public void findMemberLazy() {
+        //given
+
+
+        DataTeam teamA = new DataTeam("teamA");
+        DataTeam teamB = new DataTeam("teamB");
+        teamRepository.save(teamA);
+        teamRepository.save(teamB);
+
+        DataMember member1 = new DataMember("member1", 10, teamA);
+        DataMember member2 = new DataMember("member2", 10, teamB);
+        memberRepository.save(member1);
+        memberRepository.save(member2);
+
+        em.flush();
+        em.clear();
+
+//        List<DataMember> members = memberRepository.findAll();
+//        List<DataMember> members = memberRepository.findMemberEntityGraph();
+        List<DataMember> members = memberRepository.findMemberEntityGraph();
+//        List<DataMember> members = memberRepository.findMemberFetchJoin();
+
+        for (DataMember member : members) {
+            System.out.println("member = " + member);
+            System.out.println(member.getTeam().getClass());
+            System.out.println("member.getTeam().getName() = " + member.getTeam().getName());
+            System.out.println(member.getTeam().getClass());
+
+        }
+    }
+
 }
