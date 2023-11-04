@@ -282,4 +282,29 @@ class DataMemberRepositoryTest {
         }
     }
 
+    @Test
+    public void queryHint() {
+        DataMember member1 = memberRepository.save(new DataMember("member1", 10));
+        em.flush();
+        em.clear();
+
+        DataMember findMember = memberRepository.findReadOnlyByUsername("member1");
+        findMember.setUsername("member2");
+        em.flush();
+
+    }
+
+    @Test
+    public void lock() {
+        DataMember member1 = memberRepository.save(new DataMember("member1", 10));
+        em.flush();
+        em.clear();
+
+        List<DataMember> member11 = memberRepository.findLockByUsername("member1");
+//        findMember.setUsername("member2");
+        em.flush();
+
+    }
+
+
 }

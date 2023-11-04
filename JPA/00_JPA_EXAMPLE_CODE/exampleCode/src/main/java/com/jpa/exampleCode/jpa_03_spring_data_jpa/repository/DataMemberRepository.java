@@ -5,12 +5,11 @@ import com.jpa.exampleCode.jpa_03_spring_data_jpa.entity.DataMember;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
-import org.springframework.data.jpa.repository.EntityGraph;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 
+import javax.persistence.LockModeType;
+import javax.persistence.QueryHint;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -77,5 +76,12 @@ public interface DataMemberRepository extends JpaRepository<DataMember, Long> {
 
     @EntityGraph(attributePaths = {"team"})
     List<DataMember> findEntityGraphByUsername(@Param("username") String username);
+
+    @QueryHints(value = @QueryHint(name = "org.hibernate.readOnly", value = "true"))
+    DataMember findReadOnlyByUsername(String username);
+
+
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    List<DataMember> findLockByUsername(String username);
 
 }
