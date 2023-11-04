@@ -5,7 +5,6 @@ import com.jpa.exampleCode.jpa_03_spring_data_jpa.entity.DataMember;
 import com.jpa.exampleCode.jpa_03_spring_data_jpa.entity.DataTeam;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.internal.matchers.ArrayEquals;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
@@ -14,6 +13,7 @@ import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +27,8 @@ class DataMemberRepositoryTest {
 
     @Autowired
     DataTeamRepository teamRepository;
+    @Autowired
+    EntityManager em;
 
     @Test
     public void testMember() {
@@ -222,6 +224,29 @@ class DataMemberRepositoryTest {
         Assertions.assertTrue(page.isFirst());
         Assertions.assertTrue(page.hasNext());
 
+    }
+
+    @Test
+    public void bulkUpdate() {
+        memberRepository.save(new DataMember("member1", 10));
+        memberRepository.save(new DataMember("member2", 19));
+        memberRepository.save(new DataMember("member3", 20));
+        memberRepository.save(new DataMember("member4", 21));
+        memberRepository.save(new DataMember("member5", 40));
+
+
+        List<DataMember> member1 = memberRepository.findByUsername("member1");
+        DataMember member = member1.get(0);
+        member.setAge(15);
+
+        int resultCount = memberRepository.bulkAgePlus(20);
+
+//        em.flush();
+//        em.clear();
+        List<DataMember> result = memberRepository.findByUsername("member5");
+        DataMember member5 = result.get(0);
+        System.out.println("member5.getAge() = " + member5.getAge());
+        Assertions.assertEquals(resultCount, 3);
     }
 
 }
