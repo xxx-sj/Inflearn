@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public interface DataMemberRepository extends JpaRepository<DataMember, Long> {
+public interface DataMemberRepository extends JpaRepository<DataMember, Long>, DataCustomMemberRepository {
 
     List<DataMember> findByUsername(String username);
 

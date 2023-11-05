@@ -306,5 +306,10 @@ class DataMemberRepositoryTest {
 
     }
 
+    @Test
+    public void callTest() {
+        memberRepository.findMemberCustom();
+    }
+
 
 }
