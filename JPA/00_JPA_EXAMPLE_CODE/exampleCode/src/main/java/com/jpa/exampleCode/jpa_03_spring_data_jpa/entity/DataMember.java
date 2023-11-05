@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of = {"id", "username", "age"})
-public class DataMember {
+public class DataMember extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name = "member_id")
