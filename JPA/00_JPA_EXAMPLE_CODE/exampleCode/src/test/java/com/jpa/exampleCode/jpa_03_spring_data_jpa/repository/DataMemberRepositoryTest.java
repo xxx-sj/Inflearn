@@ -311,5 +311,88 @@ class DataMemberRepositoryTest {
         memberRepository.findMemberCustom();
     }
 
+    @Test
+    public void projections() {
+        DataTeam teamA = new DataTeam("teamA");
+        em.persist(teamA);
+
+        DataMember m1 = new DataMember("m1", 0, teamA);
+        DataMember m2 = new DataMember("m2", 0, teamA);
+
+        em.persist(m1);
+        em.persist(m2);
+
+        em.flush();
+        em.clear();
+
+        //when
+        List<UsernameOnly> result = memberRepository.findProjectionsByUsername("m1");
+        for (UsernameOnly usernameOnly : result) {
+            System.out.println("usernameOnly = " + usernameOnly.getUsername());
+        }
+    }
+
+    @Test
+    public void classProjection() {
+        DataTeam teamA = new DataTeam("teamA");
+        em.persist(teamA);
+
+        DataMember m1 = new DataMember("m1", 0, teamA);
+        DataMember m2 = new DataMember("m2", 0, teamA);
+
+        em.persist(m1);
+        em.persist(m2);
+
+        em.flush();
+        em.clear();
+
+        //when
+        List<UsernameOnlyDto> m11 = memberRepository.findClassProjectionsByUsername("m1");
+        for (UsernameOnlyDto ss : m11) {
+            System.out.println("ss = " + ss);
+        }
+    }
+
+    @Test
+    public void genericProjection() {
+        DataTeam teamA = new DataTeam("teamA");
+        em.persist(teamA);
+
+        DataMember m1 = new DataMember("m1", 0, teamA);
+        DataMember m2 = new DataMember("m2", 0, teamA);
+
+        em.persist(m1);
+        em.persist(m2);
+
+        em.flush();
+        em.clear();
+
+        //when
+        List<UsernameOnlyDto> m11 = memberRepository.findGenericByUsername("m1", UsernameOnlyDto.class);
+        for (UsernameOnlyDto ss : m11) {
+            System.out.println("ss = " + ss);
+        }
+    }
+
+    @Test
+    public void nestedProjection() {
+        DataTeam teamA = new DataTeam("teamA");
+        em.persist(teamA);
+
+        DataMember m1 = new DataMember("m1", 0, teamA);
+        DataMember m2 = new DataMember("m2", 0, teamA);
+
+        em.persist(m1);
+        em.persist(m2);
+
+        em.flush();
+        em.clear();
+
+        //when
+        List<NestedClosedProjections> m11 = memberRepository.findGenericByUsername("m1", NestedClosedProjections.class);
+        for (NestedClosedProjections ss : m11) {
+            System.out.println("ss = " + ss);
+        }
+    }
 
 }

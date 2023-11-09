@@ -84,4 +84,10 @@ public interface DataMemberRepository extends JpaRepository<DataMember, Long>, D
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     List<DataMember> findLockByUsername(String username);
 
+
+    List<UsernameOnly> findProjectionsByUsername(@Param("username") String username);
+    List<UsernameOnlyDto> findClassProjectionsByUsername(@Param("username") String username);
+
+    <T> List<T> findGenericByUsername(@Param("username") String username, Class<T> type);
+
 }

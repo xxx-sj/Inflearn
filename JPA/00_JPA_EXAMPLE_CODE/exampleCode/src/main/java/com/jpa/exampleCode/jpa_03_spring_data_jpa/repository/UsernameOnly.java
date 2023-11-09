@@ -1,0 +1,10 @@
+package com.jpa.exampleCode.jpa_03_spring_data_jpa.repository;
+
+import org.springframework.beans.factory.annotation.Value;
+
+public interface UsernameOnly {
+//    String getUsername();
+
+    @Value("#{target.username + '' + target.age}")
+    String getUsername();
+}
