@@ -14,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.lang.reflect.Member;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -393,6 +394,32 @@ class DataMemberRepositoryTest {
         for (NestedClosedProjections ss : m11) {
             System.out.println("ss = " + ss);
         }
+    }
+
+    @Test
+    public void native_query () {
+        DataTeam teamA = new DataTeam("teamA");
+        em.persist(teamA);
+
+        DataMember m1 = new DataMember("m1", 0, teamA);
+        DataMember m2 = new DataMember("m2", 0, teamA);
+
+        em.persist(m1);
+        em.persist(m2);
+
+        em.flush();
+        em.clear();
+
+        //when
+//        Member m11 = memberRepository.findByNativeQuery("m1");
+//        System.out.println("m11 = " + m11);
+        Page<MemberProjection> result = memberRepository.findByNativeProjection(PageRequest.of(1, 10));
+        List<MemberProjection> content = result.getContent();
+        for (MemberProjection memberProjection : content) {
+            System.out.println("memberProjection = " + memberProjection.getUsername());
+            System.out.println("memberProjection.getTeamName() = " + memberProjection.getTeamName());
+        }
+
     }
 
 }

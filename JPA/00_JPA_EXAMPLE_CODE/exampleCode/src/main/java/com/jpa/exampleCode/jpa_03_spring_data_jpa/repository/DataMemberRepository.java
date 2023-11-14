@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 
 import javax.persistence.LockModeType;
 import javax.persistence.QueryHint;
+import java.lang.reflect.Member;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -90,4 +91,13 @@ public interface DataMemberRepository extends JpaRepository<DataMember, Long>, D
 
     <T> List<T> findGenericByUsername(@Param("username") String username, Class<T> type);
 
+    @Query(value = "select * from DataMember where username = ?", nativeQuery = true)
+    Member findByNativeQuery(String username);
+
+
+    @Query(value = "select m.member_id as id, m.username, t.name as teamName " +
+            "from DataMember m left join DataTeam t",
+            countQuery = "select count(*) from DataMember",
+            nativeQuery = true)
+    Page<MemberProjection> findByNativeProjection(Pageable pageable);
 }
