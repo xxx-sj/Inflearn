@@ -15,6 +15,8 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.List;
 
+import static com.jpa.exampleCode.jpa_04_query_dsl.entity.QMember.member;
+
 @SpringBootTest
 @Transactional
 public class QuerydslBasicTest {
@@ -61,12 +63,13 @@ public class QuerydslBasicTest {
 
     @Test
     void startQuerydsl() {
-        QMember m = new QMember("m");
+//        QMember m = new QMember("m");
+//        QMember m = QMember.member;
 
         Member findMember = queryFactory
-                .select(m)
-                .from(m)
-                .where(m.username.eq("member1")) //파라미터 바인딩
+                .select(member)
+                .from(member)
+                .where(member.username.eq("member1")) //파라미터 바인딩
                 .fetchOne();
 
         Assertions.assertEquals(findMember.getUsername(), "member1");
