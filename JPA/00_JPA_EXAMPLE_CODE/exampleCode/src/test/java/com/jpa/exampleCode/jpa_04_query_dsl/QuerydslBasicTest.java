@@ -3,6 +3,7 @@ package com.jpa.exampleCode.jpa_04_query_dsl;
 import com.jpa.exampleCode.jpa_04_query_dsl.entity.Member;
 import com.jpa.exampleCode.jpa_04_query_dsl.entity.QMember;
 import com.jpa.exampleCode.jpa_04_query_dsl.entity.Team;
+import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.JPQLQueryFactory;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.Assertions;
@@ -97,5 +98,43 @@ public class QuerydslBasicTest {
                 .fetchOne();
 
         Assertions.assertEquals(result.getUsername(), "member1");
+    }
+
+    @Test
+    public void resultFetch() {
+//        List<Member> fetch = queryFactory.selectFrom(member)
+//                .fetch();
+//
+//        Member fetchOne = queryFactory.selectFrom(member)
+//                .fetchOne();
+//
+//        Member fetchFirst = queryFactory.selectFrom(member)
+//                .fetchFirst();
+
+        //TODO 향후 미지원
+        QueryResults<Member> results = queryFactory
+                .selectFrom(member)
+                .fetchResults();
+
+
+        results.getTotal();
+        List<Member> content = results.getResults();
+
+        List<Member> fetchResult = queryFactory
+                .selectFrom(member)
+                .fetch();
+
+        List<Member> content2 = fetchResult;
+        int count = fetchResult.size();
+
+        //TODO 향후 미지원
+        long total = queryFactory
+                .selectFrom(member)
+                .fetchCount();
+
+        Long totalCount = queryFactory.select(member.count())
+                .from(member)
+                .fetchOne();
+
     }
 }
