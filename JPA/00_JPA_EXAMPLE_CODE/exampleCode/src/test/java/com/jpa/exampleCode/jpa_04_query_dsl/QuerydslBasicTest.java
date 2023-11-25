@@ -7,6 +7,7 @@ import com.jpa.exampleCode.jpa_04_query_dsl.entity.Team;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.CaseBuilder;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.JPQLQueryFactory;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -464,6 +465,63 @@ public class QuerydslBasicTest {
 
             System.out.println("s = " + s);
         }
+    }
+
+    @Test
+    public void constant() {
+        List<Tuple> result = queryFactory
+                .select(member.username, Expressions.constant("A"))
+                .from(member)
+                .fetch();
+
+        for (Tuple tuple : result) {
+            System.out.println("tuple = " + tuple);
+        }
+    }
+
+    @Test
+    public void concat() {
+        //{username}_{age}
+        //여기서 age는 문자가 아니기 때문에 문자로 변경하기 위해서
+        //stringValue를 사용한다.
+        List<String> result = queryFactory
+                .select(member.username.concat("_").concat(member.age.stringValue()))
+                .from(member)
+                .where(member.username.eq("member1"))
+                .fetch();
+
+        for (String s : result) {
+            System.out.println("s = " + s);
+        }
+    }
+
+
+    @Test
+    public void simpleProjection() {
+        List<String> result = queryFactory
+                .select(member.username)
+                .from(member)
+                .fetch();
+
+        for (String s : result) {
+            System.out.println("s = " + s);
+        }
+    }
+
+    @Test
+    public void tupleProjection() {
+        List<Tuple> result = queryFactory
+                .select(member.username, member.age)
+                .from(member)
+                .fetch();
+
+        for (Tuple tuple : result) {
+            String username = tuple.get(member.username);
+            Integer age = tuple.get(member.age);
+            System.out.println("username = " + username);
+            System.out.println("age = " + age);
+        }
+
     }
 }
 
