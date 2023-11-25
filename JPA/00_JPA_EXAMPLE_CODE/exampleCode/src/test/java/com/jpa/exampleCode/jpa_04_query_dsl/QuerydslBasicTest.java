@@ -165,4 +165,34 @@ public class QuerydslBasicTest {
 
 
     }
+
+    @Test
+    public void paging1() {
+        List<Member> result = queryFactory
+                .selectFrom(member)
+                .orderBy(member.username.desc())
+                .offset(1)
+                .limit(2)
+                .fetch();
+    }
+
+
+    @Test
+    public void paging2() {
+        List<Member> result = queryFactory
+                .selectFrom(member)
+                .orderBy(member.username.desc())
+                .offset(1)
+                .limit(2)
+                .fetch();
+
+        Long count = queryFactory
+                .select(member.count())
+                .from(member)
+                .fetchOne();
+
+        Assertions.assertEquals(count, 4);
+        Assertions.assertEquals(result.size(), 2);
+    }
 }
+
