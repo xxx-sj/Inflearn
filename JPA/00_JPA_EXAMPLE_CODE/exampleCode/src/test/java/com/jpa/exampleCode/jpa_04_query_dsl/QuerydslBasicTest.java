@@ -16,6 +16,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.jpa.exampleCode.jpa_04_query_dsl.entity.QMember.member;
@@ -241,8 +243,42 @@ public class QuerydslBasicTest {
         Assertions.assertEquals(teamB.get(team.name), "teamB");
         Assertions.assertEquals(teamB.get(member.age.avg()), 35);
 
+    }
+
+    /**
+     * teamA에 소속된 모든 회원
+     */
+    @Test
+    public void join() {
+        List<Member> result = queryFactory
+                .selectFrom(member)
+                .leftJoin(member.team, team)
+                .where(team.name.eq("teamA"))
+                .fetch();
+
+        Assertions.assertEquals(result.get(0).getUsername(), "member1");
+        Assertions.assertEquals(result.get(1).getUsername(), "member2");
+    }
 
 
+    /**
+     * 세타 조인 
+     * 회원의 이름이 팀 이름과 같은 회원 조회
+     */
+    @Test
+    public void theta_join() {
+        em.persist(new Member("teamA"));
+        em.persist(new Member("teamB"));
+        em.persist(new Member("teamC"));
+
+        List<Member> result = queryFactory
+                .select(member)
+                .from(member, team)
+                .where(member.username.eq(team.name))
+                .fetch();
+
+        Assertions.assertEquals(result.get(0).getUsername(), "teamA");
+        Assertions.assertEquals(result.get(0).getUsername(), "teamB");
     }
 }
 
