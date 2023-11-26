@@ -7,6 +7,7 @@ import com.jpa.exampleCode.jpa_04_query_dsl.entity.Member;
 import com.jpa.exampleCode.jpa_04_query_dsl.entity.QMember;
 import com.jpa.exampleCode.jpa_04_query_dsl.entity.QTeam;
 import com.jpa.exampleCode.jpa_04_query_dsl.entity.Team;
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.ExpressionUtils;
@@ -27,6 +28,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 import javax.transaction.Transactional;
 import java.lang.reflect.Array;
+import java.util.AbstractSet;
 import java.util.Arrays;
 import java.util.List;
 
@@ -613,5 +615,30 @@ public class QuerydslBasicTest {
     }
 
 
+    @Test
+    public void dynamicQuery_BooleanBuilder() {
+        String usernameParam = "member1";
+        Integer ageParam = null;
+
+        List<Member> result = searchMember1(usernameParam, ageParam);
+        Assertions.assertEquals(1, result.size());
+    }
+
+    private List<Member> searchMember1(String usernameCond, Integer ageCond) {
+
+        BooleanBuilder builder = new BooleanBuilder();
+        if(usernameCond != null) {
+            builder.and(member.username.eq(usernameCond));
+        }
+
+        if (ageCond != null) {
+            builder.and(member.age.eq(ageCond));
+        }
+
+        return queryFactory
+                .selectFrom(member)
+                .where(builder)
+                .fetch();
+    }
 }
 
