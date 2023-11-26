@@ -1,6 +1,7 @@
 package com.jpa.exampleCode.jpa_04_query_dsl;
 
 import com.jpa.exampleCode.jpa_04_query_dsl.dto.MemberDto;
+import com.jpa.exampleCode.jpa_04_query_dsl.dto.QMemberDto;
 import com.jpa.exampleCode.jpa_04_query_dsl.dto.UserDto;
 import com.jpa.exampleCode.jpa_04_query_dsl.entity.Member;
 import com.jpa.exampleCode.jpa_04_query_dsl.entity.QMember;
@@ -599,6 +600,17 @@ public class QuerydslBasicTest {
         }
     }
 
+    @Test
+    public void findDtoByQueryProjection() {
+        List<MemberDto> result = queryFactory
+                .select(new QMemberDto(member.username, member.age))
+                .from(member)
+                .fetch();
+
+        for (MemberDto memberDto : result) {
+            System.out.println("memberDto = " + memberDto);
+        }
+    }
 
 
 }
