@@ -3,6 +3,7 @@ package com.jpa.exampleCode.jpa_04_query_dsl.repository;
 import com.jpa.exampleCode.jpa_04_query_dsl.dto.MemberSearchCondition;
 import com.jpa.exampleCode.jpa_04_query_dsl.dto.MemberTeamDto;
 import com.jpa.exampleCode.jpa_04_query_dsl.entity.Member;
+import com.jpa.exampleCode.jpa_04_query_dsl.entity.QMember;
 import com.jpa.exampleCode.jpa_04_query_dsl.entity.Team;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -92,6 +93,31 @@ class MemberRepositoryTest {
         Page<MemberTeamDto> result = memberRepository.searchPageSimple(condition, pageRequest);
 
         Assertions.assertEquals(3, result.getSize());
+    }
 
+    @Test
+    public void querydslPredicateExecutorTest() {
+        Team teamA = new Team("teamA");
+        Team teamB = new Team("teamB");
+
+        em.persist(teamA);
+        em.persist(teamB);
+
+        Member member1 = new Member("member1", 10, teamA);
+        Member member2 = new Member("member2", 20, teamA);
+
+        Member member3 = new Member("member3", 30, teamB);
+        Member member4 = new Member("member4", 40, teamB);
+        em.persist(member1);
+        em.persist(member2);
+        em.persist(member3);
+        em.persist(member4);
+
+
+        QMember member = QMember.member;
+        Iterable result = memberRepository.findAll(member.age.between(10, 40).and(member.username.eq("member1")));
+        for (Object object : result) {
+            System.out.println("object = " + object);
+        }
     }
 }
