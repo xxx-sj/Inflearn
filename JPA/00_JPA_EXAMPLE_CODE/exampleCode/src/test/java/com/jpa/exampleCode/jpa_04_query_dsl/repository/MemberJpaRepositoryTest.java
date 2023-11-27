@@ -4,7 +4,6 @@ import com.jpa.exampleCode.jpa_04_query_dsl.dto.MemberSearchCondition;
 import com.jpa.exampleCode.jpa_04_query_dsl.dto.MemberTeamDto;
 import com.jpa.exampleCode.jpa_04_query_dsl.entity.Member;
 import com.jpa.exampleCode.jpa_04_query_dsl.entity.Team;
-import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
