@@ -3,6 +3,8 @@ server:
 
 
 spring:
+  profiles:
+    active: test
   datasource:
     # mac
 #    url: jdbc:h2:tcp://localhost/~//Desktop/github/h2/DB/jpa-example-code
