@@ -1,4 +1,4 @@
-package hello.hellospring.domain;
+package hello.hellospring.member.domain;
 
 import lombok.Getter;
 import lombok.Setter;

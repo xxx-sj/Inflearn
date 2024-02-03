@@ -1,13 +1,17 @@
-package hello.hellospring.controller;
+package hello.hellospring.member.controller;
 
 
+import hello.hellospring.member.service.MemberService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequiredArgsConstructor
 public class HelloController {
+
+    private final MemberService memberService;
 
     @GetMapping("/hello-api")
     public Hello helloApi(@RequestParam("name") String name) {
@@ -15,6 +19,11 @@ public class HelloController {
         hello.setName(name);
 
         return hello;
+    }
+
+    @GetMapping("/test")
+    public void test() {
+        memberService.findMembers();
     }
 
 
