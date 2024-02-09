@@ -69,9 +69,7 @@ public class FrontControllerServletV5 extends HttpServlet {
         }
 
         MyHandlerAdapter adapter = getHandlerAdapter(handler);
-
         ModelView mv = adapter.handle(request, response, handler);
-
 
         String viewName = mv.getViewName();//논리이름 new-form
         MyView view = viewResolver(viewName);
@@ -93,7 +91,7 @@ public class FrontControllerServletV5 extends HttpServlet {
         return handlerMappingMap.get(requestURI);
     }
 
-    private static MyView viewResolver(String viewName) {
+    private MyView viewResolver(String viewName) {
         return new MyView("/WEB-INF/views/" + viewName + ".jsp");
     }
 
