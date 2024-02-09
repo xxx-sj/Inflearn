@@ -6,7 +6,10 @@ import hello.servlet.web.frontcontroller.v2.ControllerV2;
 import hello.servlet.web.frontcontroller.v3.ControllerV3;
 import hello.servlet.web.frontcontroller.v3.controller.MemberFormControllerV3;
 import hello.servlet.web.frontcontroller.v3.controller.MemberSaveControllerV3;
+import hello.servlet.web.frontcontroller.v4.controller.MemberFormControllerV4;
+import hello.servlet.web.frontcontroller.v4.controller.MemberSaveControllerV4;
 import hello.servlet.web.frontcontroller.v5.adapter.ControllerV3HandlerAdapter;
+import hello.servlet.web.frontcontroller.v5.adapter.ControllerV4HandlerAdapter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -33,10 +36,16 @@ public class FrontControllerServletV5 extends HttpServlet {
     private void initHandlerMappingMap() {
         handlerMappingMap.put("/front-controller/v5/v3/members/new-form", new MemberFormControllerV3());
         handlerMappingMap.put("/front-controller/v5/v3/members/save", new MemberSaveControllerV3());
+
+        //v4 추가
+        handlerMappingMap.put("/front-controller/v5/v4/members/new-form", new MemberFormControllerV4());
+        handlerMappingMap.put("/front-controller/v5/v4/members/save", new MemberSaveControllerV4());
+
     }
 
     private void initHandlerAdapters() {
         handlerAdapters.add(new ControllerV3HandlerAdapter());
+        handlerAdapters.add(new ControllerV4HandlerAdapter());
     }
 
     @Override
@@ -50,6 +59,11 @@ public class FrontControllerServletV5 extends HttpServlet {
 
         if (handler instanceof ControllerV3) {
             //그에 따른 로직 호출
+
+            ControllerV3 handler1 = (ControllerV3) handler;
+            Map<String, String> map = new HashMap<>();
+            request.getParameterNames().asIterator().forEachRemaining((param) -> map.put(param,request.getParameter(param)));
+            handler1.process(map);
         } else if (handler instanceof ControllerV2) {
             // 그에 따른 로직을 호출
         }
