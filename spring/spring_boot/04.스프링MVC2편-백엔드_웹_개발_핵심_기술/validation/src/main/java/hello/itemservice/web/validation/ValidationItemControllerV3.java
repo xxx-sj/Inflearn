@@ -2,6 +2,8 @@ package hello.itemservice.web.validation;
 
 import hello.itemservice.domain.item.Item;
 import hello.itemservice.domain.item.ItemRepository;
+import hello.itemservice.domain.item.SaveCheck;
+import hello.itemservice.domain.item.UpdateCheck;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,7 +46,7 @@ public class ValidationItemControllerV3 {
     }
 
     @PostMapping("/add")
-    public String addItemV5(@Validated @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+    public String addItemV5(@Validated(SaveCheck.class) @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         //검증에 실패하면 다시 입력 폼으로
 //        if (!errors.isEmpty()) {
@@ -70,9 +72,7 @@ public class ValidationItemControllerV3 {
     }
 
     @PostMapping("/{itemId}/edit")
-    public String edit(@PathVariable Long itemId, @Validated @ModelAttribute Item item, BindingResult bindingResult) {
-
-
+    public String edit(@PathVariable Long itemId, @Validated(UpdateCheck.class) @ModelAttribute Item item, BindingResult bindingResult) {
 
 
         // 특정 필드가 아닌 복합 룰 검증
