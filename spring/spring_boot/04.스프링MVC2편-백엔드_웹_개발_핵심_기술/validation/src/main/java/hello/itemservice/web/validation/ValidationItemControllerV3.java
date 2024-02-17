@@ -70,7 +70,27 @@ public class ValidationItemControllerV3 {
     }
 
     @PostMapping("/{itemId}/edit")
-    public String edit(@PathVariable Long itemId, @ModelAttribute Item item) {
+    public String edit(@PathVariable Long itemId, @Validated @ModelAttribute Item item, BindingResult bindingResult) {
+
+
+
+
+        // 특정 필드가 아닌 복합 룰 검증
+        if (item.getPrice() != null && item.getQuantity() != null) {
+            int resultPrice = item.getPrice() * item.getQuantity();
+
+            if (resultPrice < 10000) {
+//                errors.put("globalError", "가격 * 수량의 합은 10,000원 이상이여야 합니다. 현재 값 = " + resultPrice);
+//                bindingResult.addError(new ObjectError("item", "가격 * 수량의 합은 10,000원 이상이여야 합니다. 현재 값 ="+ resultPrice));
+                bindingResult.reject("totalPriceMain", new Object[]{10000, resultPrice}, null);
+
+            }
+        }
+
+        if(bindingResult.hasErrors()) {
+            return "validation/v1/editForm";
+        }
+
         itemRepository.update(itemId, item);
         return "redirect:/validation/v1/items/{itemId}";
     }
