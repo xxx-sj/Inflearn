@@ -22,6 +22,7 @@ import java.util.Map;
 public class ValidationItemControllerV1 {
 
     private final ItemRepository itemRepository;
+    private final ItemValidator itemValidator;
 
     @GetMapping
     public String items(Model model) {
@@ -92,7 +93,7 @@ public class ValidationItemControllerV1 {
         return "redirect:/validation/v1/items/{itemId}";
     }
 
-    @PostMapping("/add")
+//    @PostMapping("/add")
     public String addItemV3(@ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
 
         //검증 오류 결과를 보관
@@ -124,6 +125,29 @@ public class ValidationItemControllerV1 {
 //                errors.put("globalError", "가격 * 수량의 합은 10,000원 이상이여야 합니다. 현재 값 = " + resultPrice);
                 bindingResult.addError(new ObjectError("item", "가격 * 수량의 합은 10,000원 이상이여야 합니다. 현재 값 ="+ resultPrice));
             }
+        }
+
+        //검증에 실패하면 다시 입력 폼으로
+//        if (!errors.isEmpty()) {
+        if (bindingResult.hasErrors()) {
+
+//            model.addAttribute("errors", errors);
+            return  "validation/v1/addForm";
+        }
+
+        //성공 로직
+
+        Item savedItem = itemRepository.save(item);
+        redirectAttributes.addAttribute("itemId", savedItem.getId());
+        redirectAttributes.addAttribute("status", true);
+        return "redirect:/validation/v1/items/{itemId}";
+    }
+
+    @PostMapping("/add")
+    public String addItemV5(@ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+
+        if (itemValidator.supports(item.getClass())) {
+            itemValidator.validate(item, bindingResult);
         }
 
         //검증에 실패하면 다시 입력 폼으로
